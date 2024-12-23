@@ -17,13 +17,13 @@ x_vals = np.linspace(-5, 10, 1000).reshape(-1, 1)
 log_density_kde = kde.score_samples(x_vals)
 density_kde = np.exp(log_density_kde)
 
-# Шаг 3. ЕМ-алгоритм для GMM
+# Шаг 3. ЕМ-алгоритм 
 gmm = GaussianMixture(n_components=2, random_state=42)
 gmm.fit(data)
 log_density_gmm = gmm.score_samples(x_vals)
 density_gmm = np.exp(log_density_gmm)
 
-# Визуализация плотностей
+
 plt.figure(figsize=(10, 6))
 plt.hist(data, bins=30, density=True, alpha=0.5, label="Исходные данные")
 plt.plot(x_vals, density_kde, label="Метод ядерного сглаживания", color='blue')
@@ -60,7 +60,7 @@ def gibbs_sampling(pdf, n_samples, x_init=0.0):
 
 samples_gibbs = gibbs_sampling(pdf_kde, 1000)
 
-# Визуализация двух наборов
+
 plt.figure(figsize=(10, 6))
 plt.hist(data, bins=30, density=True, alpha=0.5, label="Исходные данные")
 plt.hist(samples_mh, bins=30, density=True, alpha=0.5, label="Метрополис-Гастингс", color='red')
